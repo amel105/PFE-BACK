@@ -42,7 +42,7 @@ class UserRepository extends ServiceEntityRepository
         // automatically knows to select Products
         // the "p" is an alias you'll use in the rest of the query
         $qb = $this->createQueryBuilder('u')
-        ->select('u.Email,u.First_Name,u.Last_Name,u.Phone_Number,u.Password,u.id');
+        ->select('u.Email,u.First_Name,u.Last_Name,u.Phone_Number,u.id');
 
           //  ->where('webservice.baseUrl Like :url')
             //->andWhere('webservice.user = :user')
@@ -57,4 +57,5 @@ class UserRepository extends ServiceEntityRepository
         // to get just one result:
         //
     }    
+   
 }
