@@ -109,7 +109,7 @@ class UserController extends AbstractController
 
             $response = new Response();
             $response->setContent(json_encode(array(
-                'result' => 'Job done !',
+                'result' => 'Inscription réussite !',
             )));
             $response->setStatusCode(200    );
             $response->headers->set('Content-Type', 'application/json');
@@ -119,7 +119,7 @@ class UserController extends AbstractController
         }
         $response = new Response();
         $response->setContent(json_encode(array(
-            'result' => 'user already exist !',
+            'result' => 'Utilisateur encore  existe !',
         )));
         $response->setStatusCode(400    );
         $response->headers->set('Content-Type', 'application/json');
@@ -152,7 +152,7 @@ class UserController extends AbstractController
                   
                     $response = new Response();
                     $response->setContent(json_encode(array(
-                        'result' => 'Job done !',
+                        'result' => 'Inscritpion réussite !',
                     )));
                     $response->setStatusCode(200    );
                     $response->headers->set('Content-Type', 'application/json');
@@ -165,7 +165,7 @@ class UserController extends AbstractController
                     // if user exist
                     $response = new Response();
                     $response->setContent(json_encode(array(
-                        'result' => 'user already exist !',
+                        'result' => 'Utilisateur existe déjà !',
                     )));
                     $response->setStatusCode(400    );
                     $response->headers->set('Content-Type', 'application/json');
