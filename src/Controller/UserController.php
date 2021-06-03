@@ -52,7 +52,8 @@ class UserController extends AbstractController
         ->setPassword("dfn5454")
         ->setEmail("amal@gmail.com")
         ->setPhoneNumber('25609125');
-
+        //->setLastName($resultat['khelil']);
+        
    $em = $this->container->get('doctrine')->getManager();
         $em->persist($user);
         $em->flush();
@@ -102,7 +103,8 @@ class UserController extends AbstractController
         $user->setFirstName($resultat['FirstName'])
              ->setPassword($encoder->encodePassword($user,$resultat['Password']) ) 
              ->setEmail($resultat['Email'])
-             ->setPhoneNumber($resultat['PhoneNumber']);
+             ->setPhoneNumber($resultat['PhoneNumber'])
+             ->setLastName($resultat['LastName']);
 
         $em->persist($user);
         $em->flush();
