@@ -106,6 +106,7 @@ class UserController extends AbstractController
              ->setEmail($resultat['Email'])
              ->setPhoneNumber($resultat['PhoneNumber'])
              ->setLastName($resultat['LastName']);
+             //dd(LastName);
             if((int)$resultat['role'] == 1 ){
 $user->setRole(User::ROLE_BENEVOLE);
             }else{
