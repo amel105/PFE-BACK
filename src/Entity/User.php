@@ -84,7 +84,14 @@ class User implements  UserInterface
      */
     private $company;
 
-    
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $role;
+
+    const ROLE_BENEVOLE = 'benevole';
+    const ROLE_ADMIN = 'admin';
+    const ROLE_BENEFICEUR = 'beneficeur';
     public function getId(): ?int
     {
         return $this->id;
@@ -153,7 +160,7 @@ class User implements  UserInterface
         return null;
     }
     public function getRoles(){
-        return array('ROLE_USER');
+        return array($this->getRole());
     }
     public function getSalt():?string
     {
@@ -236,6 +243,18 @@ class User implements  UserInterface
     public function setCompany(string $company): self
     {
         $this->company = $company;
+
+        return $this;
+    }
+
+    public function getRole(): ?string
+    {
+        return $this->role;
+    }
+
+    public function setRole(string $role): self
+    {
+        $this->role = $role;
 
         return $this;
     }
