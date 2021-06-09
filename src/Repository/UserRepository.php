@@ -35,6 +35,11 @@ class UserRepository extends ServiceEntityRepository
         ;
     }
     */
+    /*public function countuser():array{
+        $query = $this->createQueryBuilder('u') ->select COUNT(*) FROM ('\App\Entity\User');
+        $query = $query->getQuery();
+     //   return $querry->getResult();
+    }*/
 
     
     public function findUser(): array

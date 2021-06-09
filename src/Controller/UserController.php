@@ -13,6 +13,9 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
 
+
+
+
 class UserController extends AbstractController
 {
     /**
@@ -27,8 +30,8 @@ class UserController extends AbstractController
             "name"=>$name,
             'utilisateurs' => $users
         ]);
-
     }
+
 
     /**
      * @Route("/cv",name="cv")
@@ -37,8 +40,8 @@ class UserController extends AbstractController
     {
         echo "test";
         return new Response();
-
     }
+
 
     /**
      * @Route("/addfromangular",name="add",methods={"post"})
@@ -65,6 +68,7 @@ class UserController extends AbstractController
     }
 
 
+
     /**
      * @Route("/updateUser",name="update",methods={"post"})
      */
@@ -89,6 +93,7 @@ class UserController extends AbstractController
     }
 
 
+
     /**
      * @Route("/inscription",name="register",methods={"post"})
      */
@@ -108,7 +113,7 @@ class UserController extends AbstractController
              ->setLastName($resultat['LastName']);
              //dd(LastName);
             if((int)$resultat['role'] == 1 ){
-$user->setRole(User::ROLE_BENEVOLE);
+            $user->setRole(User::ROLE_BENEVOLE);
             }else{
                 $user->setRole(User::ROLE_BENEFICEUR);
 
@@ -135,6 +140,7 @@ $user->setRole(User::ROLE_BENEVOLE);
         return $response;
 
     }
+
      /**
      * @Route("/editProfil",name="edit_profil",methods={"post"})
      */
@@ -143,17 +149,18 @@ $user->setRole(User::ROLE_BENEVOLE);
         $em = $this->container->get('doctrine')->getManager();
         $User = $em->getRepository(User::class)->findOneBy(array('id' => (int)$resultat['idUser']));
         if($user){
-            //dd('here');
-           // dd($result['email']);
+              //dd('here');
+              // dd($result['email']);
             if($user->getEmail() == $resultat['Email']){
-               // dd('here');
+              // dd('here');
                 $user->setFirstName($resultat['FirstName'])
                 ->setLastName($resultat['LastName'])
                 ->setPhoneNumber($resultat['PhoneNumber'])
                 ->setDescription($resultat['description'])
                 ->setCompany($resultat['company'])
                 ->setTitre($resultat['titre'])
-                ->setEmail($resultat['Email']);
+                ->setEmail($resultat['Email'])
+                ->setRole($resultat['role']);
 
 
                 $em->persist($user);
@@ -186,27 +193,19 @@ $user->setRole(User::ROLE_BENEVOLE);
                     return new Response();
 
                     // user not exist
-                    dd('user not exist');
+                    dd('user  nexiste pas !');
                 }
 
             }
             //dd($user->getEmail());
             //$us = $em->getRepository(User::class)->findOneBy(array('id' => $result['email']));
 
-        }
+        } 
+
         return new Response();
        // dd($user);
+
     }
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -222,9 +221,9 @@ $user->setRole(User::ROLE_BENEVOLE);
         $user = $serializer->serialize($user, 'json');
         return new JsonResponse ( $user );
         
-//dd($user);
-//return new Response();
-    }
+         //dd($user);
+         //return new Response();
+     }
 
 
     /**
@@ -246,6 +245,8 @@ $user->setRole(User::ROLE_BENEVOLE);
 //  return $response;
        // return new Response();
     }
+
+    
 
     
 }
