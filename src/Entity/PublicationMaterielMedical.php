@@ -49,10 +49,7 @@ class PublicationMaterielMedical
      */
     private $adresse;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $role;
+    
 
     public function getId(): ?int
     {
@@ -127,18 +124,6 @@ class PublicationMaterielMedical
     public function setAdresse(string $adresse): self
     {
         $this->adresse = $adresse;
-
-        return $this;
-    }
-
-    public function getRole(): ?string
-    {
-        return $this->role;
-    }
-
-    public function setRole(string $role): self
-    {
-        $this->role = $role;
 
         return $this;
     }
