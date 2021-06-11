@@ -23,19 +23,20 @@ class DonationMaterielMedicalController extends AbstractController
         ]);
     }
 
+
     /**
-     * @Route("/donationMd",name="donatemedical",methods={"post"})
+     * @Route("/donationMd",name="donatemedical",methods={"get"})
      */
     public function donatemedical(Request $request )
     {
         $resultat = json_decode($request->getContent(),true);
 
         $em = $this->container->get('doctrine')->getManager();
-        $donation = $em->getRepository(DonationMaterielMedical::class)->findOneBy(array('Email' => $resultat['Email']));
+        $donation_materiel_medical = $em->getRepository(DonationMaterielMedical::class)->findOneBy(array('Email' => $resultat['Email']));
 
-        if (!$donation){
-        $donation = new DonationMaterielMedical();
-        $donation->setFirstName($resultat['FirstName'])
+        if (!$donation_materiel_medical){
+        $donation_materiel_medical = new DonationMaterielMedical();
+        $donation_materiel_medical->setFirstName($resultat['FirstName'])
              ->setEmail($resultat['Email'])
              ->setAdresse($resultat['Adresse'])
              ->setTypeMateriel($resultat['TypeMateriel'])
@@ -43,12 +44,12 @@ class DonationMaterielMedicalController extends AbstractController
              ->setLastName($resultat['LastName']);
              //dd(LastName);
             if((int)$resultat['role'] == 1 ){
-            $donation->setRole(DonationMaterielMedical::ROLE_BENEVOLE);
+            $donation_materiel_medical->setRole(DonationMaterielMedical::ROLE_BENEVOLE);
             }else{
-                $donation->setRole(DonationMaterielMedical::ROLE_BENEFICEUR);
+            $donation_materiel_medical->setRole(DonationMaterielMedical::ROLE_BENEFICEUR);
 
             }
-        $em->persist($donation);
+        $em->persist($donation_materiel_medical);
         $em->flush();
 
             $response = new Response();
