@@ -141,71 +141,88 @@ class UserController extends AbstractController
 
     }
 
-     /**
+    /**
      * @Route("/editProfil",name="edit_profil",methods={"post"})
      */
     public function editProfile(Request $request){
         $result = json_decode($request->getContent(),true);
         $em = $this->container->get('doctrine')->getManager();
-        $User = $em->getRepository(User::class)->findOneBy(array('id' => (int)$resultat['idUser']));
-        if($user){
-              //dd('here');
-              // dd($result['email']);
-            if($user->getEmail() == $resultat['Email']){
+        $User = $em->getRepository(User::class)->findOneBy(array('id' => (int)$result['idUser']));
+        if($User){
+
+           // dd($user->getEmail());
+           if($User->getEmail() == $result['Email']){
               // dd('here');
-                $user->setFirstName($resultat['FirstName'])
-                ->setLastName($resultat['LastName'])
-                ->setPhoneNumber($resultat['PhoneNumber'])
-                ->setDescription($resultat['description'])
-                ->setCompany($resultat['company'])
-                ->setTitre($resultat['titre'])
-                ->setEmail($resultat['Email'])
-                ->setRole($resultat['role']);
+            $User->setFirstName($result['First_Name'])
+            ->setLastName($result['Last_Name'])
+            ->setJob($result['job'])
+            ->setPhoneNumber($result['Phone_Number'])
+            ->setLogo($result['logo'])
+            ->setCountry($result['country']);
 
+          
 
-                $em->persist($user);
-                $em->flush();
-                  
-                    $response = new Response();
+            $em->persist($User);
+            $em->flush();
+            $response = new Response();
                     $response->setContent(json_encode(array(
-                        'result' => 'Inscritpion réussite !',
+                        'result' => 'Job done !',
                     )));
                     $response->setStatusCode(200    );
                     $response->headers->set('Content-Type', 'application/json');
-                    return  $response;
-            }else{
-               
-                $us = $em->getRepository(User::class)->findOneBy(array('email' => $resultat['email']));
-               //dd($us);
-                if($us){
-                    // if user exist
-                    $response = new Response();
-                    $response->setContent(json_encode(array(
-                        'result' => 'Utilisateur existe déjà !',
-                    )));
-                    $response->setStatusCode(400    );
-                    $response->headers->set('Content-Type', 'application/json');
-                    return  $response;
-            
+                    return $response;
 
 
-                }else{
-                    return new Response();
 
-                    // user not exist
-                    dd('user  nexiste pas !');
-                }
 
-            }
-            //dd($user->getEmail());
-            //$us = $em->getRepository(User::class)->findOneBy(array('id' => $result['email']));
+           }
 
-        } 
+           else{
+            $us = $em->getRepository(User::class)->findOneBy(array('Email' => $result['Email']));
+              // dd($us);
+              if($us){
+                  //user exist
+                 // dd('user exist');
+                 $response = new Response();
+                 $response->setContent(json_encode(array(
+                     'result' => ' already exist !',
+                 )));
+                 $response->setStatusCode(400    );
+                 $response->headers->set('Content-Type', 'application/json');
+                 return $response;
 
+
+
+              }
+              else{
+                  //user not exist
+                  dd('user not exist');
+
+
+
+              }
+
+
+
+
+              
+
+
+
+
+           }
+
+
+
+        }
+    
         return new Response();
-       // dd($user);
-
     }
+
+
+
+
+
 
 
 

@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Controller;
-
+use App\Entity\DonationMaterielMedical;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -25,7 +25,7 @@ class DonationMaterielMedicalController extends AbstractController
 
 
     /**
-     * @Route("/donationMd",name="donatemedical",methods={"get"})
+     * @Route("/donationMd",name="donatemedical",methods={"post"})
      */
     public function donatemedical(Request $request )
     {

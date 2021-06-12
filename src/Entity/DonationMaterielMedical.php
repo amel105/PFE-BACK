@@ -49,6 +49,11 @@ class DonationMaterielMedical
      */
     private $role;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $Email;
+
    
     public function getId(): ?int
     {
@@ -123,6 +128,18 @@ class DonationMaterielMedical
     public function setRole(string $role): self
     {
         $this->role = $role;
+
+        return $this;
+    }
+
+    public function getEmail(): ?string
+    {
+        return $this->Email;
+    }
+
+    public function setEmail(string $Email): self
+    {
+        $this->Email = $Email;
 
         return $this;
     }
